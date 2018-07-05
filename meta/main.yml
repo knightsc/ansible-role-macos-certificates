@@ -11,5 +11,5 @@ galaxy_info:
       versions:
         - all
         - any
-  galaxy_tags: []
+  galaxy_tags:
     - system
