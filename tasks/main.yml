@@ -1,0 +1,12 @@
+---
+
+- name: Copy certificate to /tmp
+  copy:
+    src: "{{ item }}"
+    dest: /tmp/{{ item }}
+  loop: "{{ certificates }}"
+
+- name: Install and trust the certificate
+  shell: /usr/bin/security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /tmp/{{ item }}
+  become: true
+  loop: "{{ certificates }}"
