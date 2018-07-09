@@ -1,12 +1,12 @@
 ---
 
-- name: Copy certificate to /tmp
-  copy:
-    src: "{{ item }}"
-    dest: /tmp/{{ item }}
-  loop: "{{ certificates }}"
+- name: Make sure {{ certificates_directory }} exists
+  file:
+    path: "{{ certificates_directory }}"
+    owner: root
+    group: wheel
+    mode: 0755
+    state: directory
 
-- name: Install and trust the certificate
-  shell: /usr/bin/security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /tmp/{{ item }}
-  become: true
+- include: install_cert.yml cert="{{ item }}"
   loop: "{{ certificates }}"
