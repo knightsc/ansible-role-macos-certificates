@@ -1,0 +1,13 @@
+- name: Copy {{ cert }} to {{ certificates_directory }}
+  copy:
+    src: "{{ cert }}"
+    dest: "{{ certificates_directory }}/{{ cert }}"
+    owner: root
+    group: wheel
+    mode: 0644
+  register: file
+
+- name: Install and trust the certificate
+  shell: /usr/bin/security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain {{ certificates_directory }}/{{ cert }}
+  become: true
+  when: file.changed
