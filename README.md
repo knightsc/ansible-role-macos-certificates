@@ -20,6 +20,10 @@ variable list you can list which ones you want installed and trusted.
       - certone.cer
       - certtwo.cer
 
+The path where the certificates will be copied
+
+    certificates_directory: /tmp
+
 Example Playbook
 ----------------
 
