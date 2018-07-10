@@ -9,4 +9,4 @@
     state: directory
 
 - include_tasks: install_cert.yml cert="{{ item }}"
-  loop: "{{ certificates|flatten(levels=1) }}"
+  with_items: "{{ certificates }}"
