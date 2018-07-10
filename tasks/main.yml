@@ -8,5 +8,5 @@
     mode: 0755
     state: directory
 
-- include: install_cert.yml cert="{{ item }}"
-  loop: "{{ certificates }}"
+- include_tasks: install_cert.yml cert="{{ item }}"
+  loop: "{{ certificates|flatten(levels=1) }}"
